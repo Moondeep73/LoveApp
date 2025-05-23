@@ -41,7 +41,7 @@ st.markdown("""
 }
 /* Radio option text color */
 [data-baseweb="radio"] label {
-    color: #1b5e20 !important;
+    color: #e91e63; /* deep pink */
     font-size: 20px;
     font-weight: bold;
 }
