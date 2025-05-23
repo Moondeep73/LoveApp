@@ -20,30 +20,24 @@ st.markdown("""
 <style>
 .big-question {
     font-size: 30px;
-    color: #e91e63; /* deep pink */
+    color: #e91e63;
     font-weight: bold;
     text-align: center;
 }
+
 .stButton > button {
     font-size: 20px;
-    background-color: #f06292; /* pink */
+    background-color: #f06292;
     color: white;
     padding: 0.5em 2em;
     border-radius: 10px;
 }
-/* Radio box container */
-.radio-box {
-    background-color: #e8f5e9;
-    padding: 25px;
-    border-radius: 15px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-/* Radio option text color */
-[data-baseweb="radio"] label {
-    color: #e91e63; /* deep pink */
-    font-size: 20px;
-    font-weight: bold;
+
+/* Radio text only (deep green) */
+[data-baseweb="radio"] > div > label > div:nth-child(2) {
+    color: #1b5e20 !important;
+    font-size: 20px !important;
+    font-weight: bold !important;
 }
 </style>
 """, unsafe_allow_html=True)
