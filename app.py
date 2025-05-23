@@ -15,19 +15,45 @@ def set_background():
         unsafe_allow_html=True
     )
 
-# --- Set Up State ---
+# --- Custom CSS for Text ---
+st.markdown("""
+<style>
+.big-question {
+    font-size: 30px;
+    color: #e91e63; /* deep pink */
+    font-weight: bold;
+    text-align: center;
+}
+.radio-label > div {
+    font-size: 22px !important;
+    color: #6a1b9a !important; /* purple */
+}
+.stButton > button {
+    font-size: 20px;
+    background-color: #f06292; /* pink */
+    color: white;
+    padding: 0.5em 2em;
+    border-radius: 10px;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# --- State Init ---
 if "step" not in st.session_state:
     st.session_state.step = 0
     st.session_state.score = None
 
-# --- Main Flow ---
+# --- UI + Logic ---
 set_background()
 
 if st.session_state.step == 0:
-    st.markdown("## 💘 How do you feel about love today?")
+    st.markdown('<div class="big-question">💘 How do you feel about love today?</div>', unsafe_allow_html=True)
+
     answer = st.radio(
         "Choose one:",
-        ["I hate it", "Not feeling great", "Meh, it's okay", "Feeling warm fuzzies", "I'm floating in love! 💖"]
+        ["I hate it", "Not feeling great", "Meh, it's okay", "Feeling warm fuzzies", "I'm floating in love! 💖"],
+        key="love_feel",
+        label_visibility="collapsed"
     )
 
     if st.button("Next"):
@@ -38,7 +64,7 @@ if st.session_state.step == 0:
         st.rerun()
 
 elif st.session_state.step == 1:
-    st.markdown("## 💖 Your Love Mood:")
+    st.markdown('<div class="big-question">💖 Your Love Mood</div>', unsafe_allow_html=True)
 
     gif_map = {
         1: "Angry.gif",
