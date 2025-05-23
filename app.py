@@ -56,7 +56,7 @@ if st.session_state.step == 0:
 
     with st.container():
         st.markdown("""
-        <div style='background-color: #ffffffcc; padding: 20px; border-radius: 15px;'>
+        <div style='background-color: #e8f5e9cc; padding: 20px; border-radius: 15px;'>
         """, unsafe_allow_html=True)
 
         answer = st.radio(
