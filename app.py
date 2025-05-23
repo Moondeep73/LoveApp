@@ -26,7 +26,7 @@ st.markdown("""
 }
 .radio-label > div {
     font-size: 22px !important;
-    color: #6a1b9a !important; /* purple */
+    color: #2e7d32 !important; /* green */
 }
 .stButton > button {
     font-size: 20px;
