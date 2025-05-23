@@ -52,30 +52,32 @@ if "step" not in st.session_state:
 set_background()
 
 if st.session_state.step == 0:
-    st.markdown('<div class="big-question">💘 How do you feel about love today?</div>', unsafe_allow_html=True)
-
-    with st.container():
-        st.markdown("""
-        <div style='background-color: #e8f5e9cc; padding: 20px; border-radius: 15px; text-align: left;'>
+    st.markdown("""
+    <div style='background-color: #e8f5e9cc; padding: 30px; border-radius: 20px;'>
+        <h2 style='color:#e91e63; text-align:center;'>💘 How do you feel about love today?</h2>
         <style>
         [data-baseweb="radio"] label {
             color: #1b5e20 !important;
+            font-size: 20px;
             font-weight: bold;
         }
         </style>
-        """, unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
-        # Now force the radio to live inside that layout
-        answer = st.radio(
-            "Choose one:",
-            ["I hate it", "Not feeling great", "Meh, it's okay", "Feeling warm fuzzies", "I'm floating in love! 💖"],
-            key="love_feel",
-            label_visibility="collapsed"
-        )
+    answer = st.radio(
+        label="Choose one:",
+        options=[
+            "I hate it",
+            "Not feeling great",
+            "Meh, it's okay",
+            "Feeling warm fuzzies",
+            "I'm floating in love! 💖"
+        ],
+        key="love_feel",
+        label_visibility="collapsed"
+    )
 
-        # Close the background div
-        st.markdown("</div>", unsafe_allow_html=True)
-
+    st.markdown("</div>", unsafe_allow_html=True)
 
     if st.button("Next"):
         st.session_state.score = (
