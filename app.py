@@ -18,6 +18,7 @@ def set_background():
 # --- Custom CSS for text styling ---
 st.markdown("""
 <style>
+/*
 .big-question {
     font-size: 30px;
     color: #e91e63;
@@ -28,17 +29,22 @@ st.markdown("""
 .stButton > button {
     font-size: 20px;
     background-color: #f06292;
-    color: white;
+    color: black;
     padding: 0.5em 2em;
     border-radius: 10px;
 }
+*/
 
 /* Radio text only (deep green) */
-[data-baseweb="radio"] > div > label > div:nth-child(2) {
-    color: #1b5e20 !important;
-    font-size: 20px !important;
-    font-weight: bold !important;
-}
+/*
+#
+# [data-baseweb="radio"] > div > label > div:nth-child(2) {
+#     color: #1b5e20 !important;
+#     font-size: 20px !important;
+#     font-weight: bold !important;
+# }
+*/
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -48,56 +54,51 @@ if "step" not in st.session_state:
     st.session_state.score = None
 
 # --- Main App Flow ---
-set_background()
+# set_background()
 
 if st.session_state.step == 0:
+    # Big question as-is
     st.markdown('<div class="big-question">💘 How do you feel about love today?</div>', unsafe_allow_html=True)
 
-    with st.container():
-        # Layout trick: add padding using empty columns to simulate a centered green box
-        left, center, right = st.columns([1, 4, 1])
-        with center:
-            # Background-style using Streamlit-native method
-            st.markdown("""
-            <style>
-            .radio-block {
-                background-color: #e8f5e9;
-                padding: 20px;
-                border-radius: 15px;
-                margin-bottom: 20px;
-            }
-            [data-baseweb="radio"] label {
-                color: #e91e63; /* deep pink */
-                font-size: 20px;
-                font-weight: bold;
-            }
-            </style>
-            """, unsafe_allow_html=True)
+    # Visual container using columns
+    left, center, right = st.columns([1, 6, 1])
+    with center:
+        # Background for center column (simulating a box)
+        # st.markdown(
+        #     """
+        #     <div style='background-color: #e8f5e9; padding: 20px; border-radius: 15px;'>
+        #     <style>
+        #     [data-baseweb="radio"] label > div:nth-child(2) {
+        #         color: #1b5e20 !important;
+        #         font-size: 18px !important;
+        #         font-weight: bold !important;
+        #     }
+        #     </style>
+        #     """, unsafe_allow_html=True
+        # )
 
-            st.markdown('<div class="radio-block">', unsafe_allow_html=True)
+        answer = st.radio(
+            label="Choose one:",
+            options=[
+                "I hate it",
+                "Not feeling great",
+                "Meh, it's okay",
+                "Feeling warm fuzzies",
+                "I'm floating in love! 💖"
+            ],
+            key="love_feel",
+            label_visibility="collapsed"
+        )
 
-            answer = st.radio(
-                label="Choose one:",
-                options=[
-                    "I hate it",
-                    "Not feeling great",
-                    "Meh, it's okay",
-                    "Feeling warm fuzzies",
-                    "I'm floating in love! 💖"
-                ],
-                key="love_feel",
-                label_visibility="collapsed"
-            )
+        st.markdown("</div>", unsafe_allow_html=True)
 
-            st.markdown('</div>', unsafe_allow_html=True)
-
-        # Next button outside the centered box
-        if st.button("Next"):
-            st.session_state.score = (
-                ["I hate it", "Not feeling great", "Meh, it's okay", "Feeling warm fuzzies", "I'm floating in love! 💖"].index(answer) + 1
-            )
-            st.session_state.step = 1
-            st.rerun()
+    # Button stays below
+    if st.button("Next"):
+        st.session_state.score = (
+            ["I hate it", "Not feeling great", "Meh, it's okay", "Feeling warm fuzzies", "I'm floating in love! 💖"].index(answer) + 1
+        )
+        st.session_state.step = 1
+        st.rerun()
 
 
 elif st.session_state.step == 1:
