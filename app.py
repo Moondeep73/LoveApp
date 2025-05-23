@@ -24,10 +24,12 @@ st.markdown("""
     font-weight: bold;
     text-align: center;
 }
-.radio-label > div {
-    font-size: 22px !important;
+
+/* Make radio option text green */
+[data-baseweb="radio"] label {
     color: #2e7d32 !important; /* green */
 }
+
 .stButton > button {
     font-size: 20px;
     background-color: #f06292; /* pink */
@@ -37,6 +39,7 @@ st.markdown("""
 }
 </style>
 """, unsafe_allow_html=True)
+
 
 # --- State Init ---
 if "step" not in st.session_state:
