@@ -73,7 +73,7 @@ if st.session_state.step == 0:
                 margin-bottom: 20px;
             }
             [data-baseweb="radio"] label {
-                color: #1b5e20 !important;
+                color: #e91e63; /* deep pink */
                 font-size: 20px;
                 font-weight: bold;
             }
