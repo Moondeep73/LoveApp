@@ -25,11 +25,13 @@ st.markdown("""
     text-align: center;
 }
 
-/* Make radio option text green */
-[data-baseweb="radio"] label {
-    color: #2e7d32 !important; /* green */
+/* Force green on radio option text */
+[data-baseweb="radio"] div[role="radio"] > div:nth-child(2) {
+    color: #1b5e20 !important; /* strong dark green */
+    font-weight: bold;
 }
 
+/* Button styling */
 .stButton > button {
     font-size: 20px;
     background-color: #f06292; /* pink */
