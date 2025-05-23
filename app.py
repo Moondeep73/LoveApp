@@ -52,39 +52,47 @@ if "step" not in st.session_state:
 set_background()
 
 if st.session_state.step == 0:
-    st.markdown("""
-    <div style='background-color: #e8f5e9cc; padding: 30px; border-radius: 20px;'>
-        <h2 style='color:#e91e63; text-align:center;'>💘 How do you feel about love today?</h2>
-        <style>
-        [data-baseweb="radio"] label {
-            color: #1b5e20 !important;
-            font-size: 20px;
-            font-weight: bold;
-        }
-        </style>
-    """, unsafe_allow_html=True)
+    with st.container():
+        # Centered card layout
+        left, center, right = st.columns([1, 4, 1])
+        with center:
+            st.markdown("""
+            <div style='background-color: #e8f5e9; padding: 30px; border-radius: 20px; text-align: center;'>
+                <h2 style='color:#e91e63;'>💘 How do you feel about love today?</h2>
+            </div>
+            """, unsafe_allow_html=True)
 
-    answer = st.radio(
-        label="Choose one:",
-        options=[
-            "I hate it",
-            "Not feeling great",
-            "Meh, it's okay",
-            "Feeling warm fuzzies",
-            "I'm floating in love! 💖"
-        ],
-        key="love_feel",
-        label_visibility="collapsed"
-    )
+            # Radio will appear just under the heading inside the same column
+            st.markdown("""
+            <style>
+            [data-baseweb="radio"] label {
+                color: #1b5e20 !important;
+                font-size: 20px;
+                font-weight: bold;
+            }
+            </style>
+            """, unsafe_allow_html=True)
 
-    st.markdown("</div>", unsafe_allow_html=True)
+            answer = st.radio(
+                label="Choose one:",
+                options=[
+                    "I hate it",
+                    "Not feeling great",
+                    "Meh, it's okay",
+                    "Feeling warm fuzzies",
+                    "I'm floating in love! 💖"
+                ],
+                key="love_feel",
+                label_visibility="collapsed"
+            )
 
-    if st.button("Next"):
-        st.session_state.score = (
-            ["I hate it", "Not feeling great", "Meh, it's okay", "Feeling warm fuzzies", "I'm floating in love! 💖"].index(answer) + 1
-        )
-        st.session_state.step = 1
-        st.rerun()
+            if st.button("Next"):
+                st.session_state.score = (
+                    ["I hate it", "Not feeling great", "Meh, it's okay", "Feeling warm fuzzies", "I'm floating in love! 💖"].index(answer) + 1
+                )
+                st.session_state.step = 1
+                st.rerun()
+
 
 elif st.session_state.step == 1:
     st.markdown('<div class="big-question">💖 Your Love Mood</div>', unsafe_allow_html=True)
