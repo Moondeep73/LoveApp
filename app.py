@@ -56,9 +56,16 @@ if st.session_state.step == 0:
 
     with st.container():
         st.markdown("""
-        <div style='background-color: #e8f5e9cc; padding: 20px; border-radius: 15px;'>
+        <div style='background-color: #e8f5e9cc; padding: 20px; border-radius: 15px; text-align: left;'>
+        <style>
+        [data-baseweb="radio"] label {
+            color: #1b5e20 !important;
+            font-weight: bold;
+        }
+        </style>
         """, unsafe_allow_html=True)
 
+        # Now force the radio to live inside that layout
         answer = st.radio(
             "Choose one:",
             ["I hate it", "Not feeling great", "Meh, it's okay", "Feeling warm fuzzies", "I'm floating in love! 💖"],
@@ -66,7 +73,9 @@ if st.session_state.step == 0:
             label_visibility="collapsed"
         )
 
+        # Close the background div
         st.markdown("</div>", unsafe_allow_html=True)
+
 
     if st.button("Next"):
         st.session_state.score = (
