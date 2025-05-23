@@ -54,12 +54,19 @@ set_background()
 if st.session_state.step == 0:
     st.markdown('<div class="big-question">💘 How do you feel about love today?</div>', unsafe_allow_html=True)
 
-    answer = st.radio(
-        "Choose one:",
-        ["I hate it", "Not feeling great", "Meh, it's okay", "Feeling warm fuzzies", "I'm floating in love! 💖"],
-        key="love_feel",
-        label_visibility="collapsed"
-    )
+    with st.container():
+        st.markdown("""
+        <div style='background-color: #ffffffcc; padding: 20px; border-radius: 15px;'>
+        """, unsafe_allow_html=True)
+
+        answer = st.radio(
+            "Choose one:",
+            ["I hate it", "Not feeling great", "Meh, it's okay", "Feeling warm fuzzies", "I'm floating in love! 💖"],
+            key="love_feel",
+            label_visibility="collapsed"
+        )
+
+        st.markdown("</div>", unsafe_allow_html=True)
 
     if st.button("Next"):
         st.session_state.score = (
