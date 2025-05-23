@@ -6,7 +6,7 @@ def set_background():
         """
         <style>
         .stApp {
-            background-image: url("https://raw.githubusercontent.com/Moondeep73/LoveApp/main/assets/Background.jpg");
+            background-image: url("https://raw.githubusercontent.com/Moondeep73/LoveApp/main/assets/Background.jpeg");
             background-size: cover;
             background-position: center;
         }
@@ -18,9 +18,9 @@ def set_background():
 # --- Set Up State ---
 if "step" not in st.session_state:
     st.session_state.step = 0
-    st.session_state.score = 0
+    st.session_state.score = None
 
-# --- Question & Answer Logic ---
+# --- Main Flow ---
 set_background()
 
 if st.session_state.step == 0:
@@ -31,29 +31,32 @@ if st.session_state.step == 0:
     )
 
     if st.button("Next"):
-        st.session_state.score = [1, 2, 3, 4, 5][
-            ["I hate it", "Not feeling great", "Meh, it's okay", "Feeling warm fuzzies", "I'm floating in love! 💖"].index(answer)
-        ]
+        st.session_state.score = (
+            ["I hate it", "Not feeling great", "Meh, it's okay", "Feeling warm fuzzies", "I'm floating in love! 💖"].index(answer) + 1
+        )
         st.session_state.step = 1
-        st.experimental_rerun()
+        st.rerun()
 
-# --- Show Result ---
 elif st.session_state.step == 1:
     st.markdown("## 💖 Your Love Mood:")
 
-    score = st.session_state.score
     gif_map = {
         1: "Angry.gif",
         2: "Upset.gif",
         3: "Neutral.gif",
         4: "Happy.gif",
-        5: "Euphoric.gif"
+        5: "Love.gif"
     }
 
-    gif_url = f"https://raw.githubusercontent.com/Moondeep73/LoveApp/main/assets/{gif_map[score]}"
-    st.image(gif_url)
+    score = st.session_state.get("score")
+
+    if score in gif_map:
+        gif_url = f"https://raw.githubusercontent.com/Moondeep73/LoveApp/main/assets/{gif_map[score]}"
+        st.image(gif_url)
+    else:
+        st.warning("No valid score found.")
 
     if st.button("Restart"):
         st.session_state.step = 0
-        st.session_state.score = 0
-        st.experimental_rerun()
+        st.session_state.score = None
+        st.rerun()
